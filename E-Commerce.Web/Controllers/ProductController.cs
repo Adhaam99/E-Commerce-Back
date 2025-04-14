@@ -1,4 +1,4 @@
-﻿using E_Commerce.Web.Models;
+﻿using DomainLayer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
