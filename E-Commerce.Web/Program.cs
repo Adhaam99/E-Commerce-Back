@@ -3,6 +3,7 @@ using DomainLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Presentation.Data;
 using Presistence;
+using Presistence.Repositories;
 
 namespace E_Commerce.Web
 {
@@ -23,6 +24,7 @@ namespace E_Commerce.Web
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             #endregion
 
             var app = builder.Build();
