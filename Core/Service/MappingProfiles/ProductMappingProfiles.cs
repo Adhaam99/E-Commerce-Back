@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DomainLayer.Models;
+using Service.MappingProfiles;
 using Shared;
 
 namespace Service.Profiles
@@ -15,8 +16,9 @@ namespace Service.Profiles
         public ProductMappingProfiles()
         {
             CreateMap<Product, ProductDto>()
-                .ForMember(dest => dest.TypeName, option => option.MapFrom(src => src.ProductType.Name))
-                .ForMember(dest => dest.BrandName, option => option.MapFrom(src => src.ProductBrand.Name));
+                .ForMember(dest => dest.TypeName, options => options.MapFrom(src => src.ProductType.Name))
+                .ForMember(dest => dest.BrandName, options => options.MapFrom(src => src.ProductBrand.Name))
+                .ForMember(dest => dest.PictureUrl, options => options.MapFrom<PictureUrlResolver>());
 
             CreateMap<ProductBrand, BrandDto>();
 
