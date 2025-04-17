@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
+using AutoMapper;
 using DomainLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Presentation.Data;
 using Presistence;
 using Presistence.Repositories;
+using Service.Profiles;
 
 namespace E_Commerce.Web
 {
@@ -25,6 +27,7 @@ namespace E_Commerce.Web
             });
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddAutoMapper(typeof(Service.AssemplyReference).Assembly);
             #endregion
 
             var app = builder.Build();
