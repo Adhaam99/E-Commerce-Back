@@ -1,6 +1,6 @@
 @E_Commerce.Web_HostAddress = http://localhost:5190
 
-GET {{E_Commerce.Web_HostAddress}}/api/weatherforecast/
+GET {{E_Commerce.Web_HostAddress}}/images/products/VegetarianRefriedBeans.png
 Accept: application/json
 
 ###

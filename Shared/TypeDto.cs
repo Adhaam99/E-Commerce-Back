@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Contracts
+namespace Shared
 {
-    public interface IDataSeeding
+    public class TypeDto
     {
-        Task DataSeedAsync();
+        public int Id { get; set; }
+        public string Name { get; set; } = default!;
     }
 }

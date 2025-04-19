@@ -1,0 +1,14 @@
+﻿@Presentation_HostAddress = http://localhost:5190
+
+GET {{Presentation_HostAddress}}/api/Products/brands
+
+###
+
+@id=10
+GET {{Presentation_HostAddress}}/api/Products/{{id}}
+
+###
+
+GET {{Presentation_HostAddress}}/api/Products
+
+###
