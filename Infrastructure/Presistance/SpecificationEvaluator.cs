@@ -3,10 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DomainLayer.Contracts;
+using DomainLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Presistence
 {
-    internal class SpecificationEvaluator
+    public static class SpecificationEvaluator
     {
+        // Create Query
+
+        public static IQueryable<TEntity> CreateQuery<TEntity , TKey>(IQueryable<TEntity> InputQuery , ISpecifications<TEntity, TKey> specifications) where TEntity : BaseEntity<TKey>
+        {
+            var Query = InputQuery;
+            // Apply Criteria
+            if (specifications.Criteria is not null)
+            {
+                Query = InputQuery.Where(specifications.Criteria);
+            }
+            // Apply Includes
+            if (specifications.IncludeExpressions is not null && specifications.IncludeExpressions.Count > 0)
+            {
+                    Query = specifications.IncludeExpressions.Aggregate(Query , (CurrentQuerry , IncludeExp) => CurrentQuerry.Include(IncludeExp));
+            }
+            
+            return Query;
+        }
     }
 }

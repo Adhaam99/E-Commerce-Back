@@ -9,13 +9,13 @@ using DomainLayer.Models;
 
 namespace Service.Specifications
 {
-    public class BaseSpecification<TEntity, TKey> : ISpecifications<TEntity, TKey> where TEntity : BaseEntity<TKey>
+    abstract class BaseSpecification<TEntity, TKey> : ISpecifications<TEntity, TKey> where TEntity : BaseEntity<TKey>
     {
-        public BaseSpecification(Expression<Func<TEntity, bool>> CriteriaExpression)
+        public BaseSpecification(Expression<Func<TEntity, bool>>? CriteriaExpression)
         {
             Criteria = CriteriaExpression;
         }
-        public Expression<Func<TEntity, bool>> Criteria { get; private set; }
+        public Expression<Func<TEntity, bool>>? Criteria { get; private set; }
 
         public List<Expression<Func<TEntity, object>>> IncludeExpressions { get; } = [];
 
