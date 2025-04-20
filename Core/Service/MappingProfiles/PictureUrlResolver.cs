@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DomainLayer.Models;
 using Microsoft.Extensions.Configuration;
-using Shared;
+using Shared.DataTransferObjects;
 
 namespace Service.MappingProfiles
 {

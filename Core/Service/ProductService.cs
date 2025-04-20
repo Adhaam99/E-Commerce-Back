@@ -4,14 +4,15 @@ using DomainLayer.Models;
 using Service.Specifications;
 using ServiceAbstraction;
 using Shared;
+using Shared.DataTransferObjects;
 
 namespace Service
 {
     internal class ProductService(IUnitOfWork _unitOfWork, IMapper _mapper) : IProductService
     {
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(int? brandId, int? typeId)
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(int? brandId, int? typeId, ProductSortingOptions sortingOptions)
         {
-            var Specifications = new ProductWithBrandAndTypeSpecifications(brandId , typeId);
+            var Specifications = new ProductWithBrandAndTypeSpecifications(brandId , typeId, sortingOptions);
             var Repo = _unitOfWork.GetRepository<Product, int>();
             var Products = await Repo.GetAllAsync(Specifications);
             var ProductsDto = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(Products);

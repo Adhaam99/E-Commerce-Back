@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DomainLayer.Models;
 using Service.MappingProfiles;
-using Shared;
+using Shared.DataTransferObjects;
 
 namespace Service.Profiles
 {

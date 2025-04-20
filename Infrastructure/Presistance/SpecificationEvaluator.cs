@@ -13,13 +13,23 @@ namespace Presistence
     {
         // Create Query
 
-        public static IQueryable<TEntity> CreateQuery<TEntity , TKey>(IQueryable<TEntity> InputQuery , ISpecifications<TEntity, TKey> specifications) where TEntity : BaseEntity<TKey>
+        public static IQueryable<TEntity> CreateQuery<TEntity , TKey> (IQueryable<TEntity> InputQuery , ISpecifications<TEntity, TKey> specifications) where TEntity : BaseEntity<TKey>
         {
             var Query = InputQuery;
             // Apply Criteria
             if (specifications.Criteria is not null)
             {
                 Query = InputQuery.Where(specifications.Criteria);
+            }
+            // Apply OrderBy & OrderByDesc
+            if (specifications.OrderBy is not null)
+            {
+                Query = InputQuery.OrderBy(specifications.OrderBy);
+            }
+
+            if (specifications.OrderByDescending is not null)
+            {
+                Query = InputQuery.OrderByDescending(specifications.OrderByDescending);
             }
             // Apply Includes
             if (specifications.IncludeExpressions is not null && specifications.IncludeExpressions.Count > 0)

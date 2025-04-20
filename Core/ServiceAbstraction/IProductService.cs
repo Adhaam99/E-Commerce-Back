@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shared;
+using Shared.DataTransferObjects;
 
 namespace ServiceAbstraction
 {
@@ -11,7 +12,7 @@ namespace ServiceAbstraction
     {
         // Get All Products
 
-        Task<IEnumerable<ProductDto>> GetAllProductsAsync(int? brandId, int? typeId);
+        Task<IEnumerable<ProductDto>> GetAllProductsAsync(int? brandId, int? typeId, ProductSortingOptions sortingOptions);
 
         // Get Product By Id
 
