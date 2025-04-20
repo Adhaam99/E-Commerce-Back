@@ -19,17 +19,17 @@ namespace Presistence
             // Apply Criteria
             if (specifications.Criteria is not null)
             {
-                Query = InputQuery.Where(specifications.Criteria);
+                Query = Query.Where(specifications.Criteria);
             }
             // Apply OrderBy & OrderByDesc
             if (specifications.OrderBy is not null)
             {
-                Query = InputQuery.OrderBy(specifications.OrderBy);
+                Query = Query.OrderBy(specifications.OrderBy);
             }
 
             if (specifications.OrderByDescending is not null)
             {
-                Query = InputQuery.OrderByDescending(specifications.OrderByDescending);
+                Query = Query.OrderByDescending(specifications.OrderByDescending);
             }
             // Apply Includes
             if (specifications.IncludeExpressions is not null && specifications.IncludeExpressions.Count > 0)
