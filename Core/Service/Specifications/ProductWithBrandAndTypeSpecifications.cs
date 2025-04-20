@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DomainLayer.Models;
+﻿using DomainLayer.Models;
 
 namespace Service.Specifications
 {
     internal class ProductWithBrandAndTypeSpecifications : BaseSpecification<Product, int>
     {
-        public ProductWithBrandAndTypeSpecifications(): base(null)
+        public ProductWithBrandAndTypeSpecifications(int? brandId, int? typeId)
+            : base(P => (!brandId.HasValue || P.BrandId == brandId) &&
+            (!typeId.HasValue || P.TypeId == typeId))
         {
             AddInclude(P => P.ProductBrand);
             AddInclude(P => P.ProductType);
