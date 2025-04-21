@@ -36,7 +36,13 @@ namespace Presistence
             {
                     Query = specifications.IncludeExpressions.Aggregate(Query , (CurrentQuerry , IncludeExp) => CurrentQuerry.Include(IncludeExp));
             }
-            
+
+            // Apply Pagination
+            if (specifications.IsPaginated)
+            {
+                Query = Query.Skip(specifications.Skip).Take(specifications.Take);
+            }
+
             return Query;
         }
     }

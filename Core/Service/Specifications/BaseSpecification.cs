@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using DomainLayer.Contracts;
 using DomainLayer.Models;
 
@@ -26,9 +21,26 @@ namespace Service.Specifications
         #region Sorting
         public Expression<Func<TEntity, object>> OrderBy { get; private set; }
         public void AddOrderBy(Expression<Func<TEntity, object>> orderByExp) => OrderBy = orderByExp;
-        public Expression<Func<TEntity, object>> OrderByDescending { get; private set; }
         public void AddOrderByDescending(Expression<Func<TEntity, object>> orderByDescExp) => OrderByDescending = orderByDescExp;
+        public Expression<Func<TEntity, object>> OrderByDescending { get; private set; }
 
         #endregion
+
+        #region Pagination
+        public int Take { get; private set; }
+        public int Skip { get; private set; }
+        public bool IsPaginated { get; set; }
+
+        public void ApplyPagination(int pageSize, int pageIndex)
+        {
+            IsPaginated = true;
+            Take = pageSize;
+            Skip = (pageIndex - 1) * pageSize;
+
+        }
+        #endregion
+
     }
+
+
 }
