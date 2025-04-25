@@ -15,7 +15,7 @@ namespace Shared
         public int? BrandId { get; set; }
         public ProductSortingOptions sortingOptions { get; set; }
         public string? SearchValue { get; set; }
-        public int PageIndex { get; set; }
+        public int PageIndex { get; set; } = 1;
 
         private int pageSize = DefaultPageSize;
 
