@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class TypeDto
+    public enum ProductSortingOptions
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = default!;
+        NameAsc = 1,
+        NameDesc = 2,
+        PriceAsc = 3,
+        PriceDesc = 4,
     }
 }
