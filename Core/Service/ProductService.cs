@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Contracts;
+using DomainLayer.Exceptions;
 using DomainLayer.Models;
 using Service.Specifications;
 using ServiceAbstraction;
@@ -34,7 +35,7 @@ namespace Service
             }
             else
             {
-                throw new Exception($"Product with id {id} not found");
+                throw new ProductNotFoundException(id);
             }
 
         }
