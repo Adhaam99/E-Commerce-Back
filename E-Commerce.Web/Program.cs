@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DomainLayer.Contracts;
+using E_Commerce.Web.CustomMiddleWares;
 using Microsoft.EntityFrameworkCore;
 using Presentation.Data;
 using Presistence;
@@ -42,6 +43,9 @@ namespace E_Commerce.Web
             await ObjectOfDataSeeding.DataSeedAsync();
 
             // Configure the HTTP request pipeline.
+
+            app.UseMiddleware<CustomExceptionHandlerMiddleWare>();
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
