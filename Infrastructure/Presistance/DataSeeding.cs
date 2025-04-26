@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 using DomainLayer.Contracts;
-using DomainLayer.Models;
+using DomainLayer.Models.ProductModule;
 using Microsoft.EntityFrameworkCore;
 using Presentation.Data;
 

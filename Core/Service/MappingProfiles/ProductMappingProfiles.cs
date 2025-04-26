@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DomainLayer.Models;
+using DomainLayer.Models.ProductModule;
 using Service.MappingProfiles;
 using Shared.DataTransferObjects;
 

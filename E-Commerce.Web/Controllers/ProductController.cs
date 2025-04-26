@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.ProductModule;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
