@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DomainLayer.Models.ProductModule;
 using Service.MappingProfiles;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.PrdouctModuleDtos;
 
 namespace Service.Profiles
 {
