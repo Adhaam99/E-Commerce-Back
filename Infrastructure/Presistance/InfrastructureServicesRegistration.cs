@@ -1,5 +1,7 @@
 ﻿
 
+using StackExchange.Redis;
+
 namespace Presistence
 {
     public static class InfrastructureServicesRegistration
@@ -12,6 +14,13 @@ namespace Presistence
             });
             Services.AddScoped<IDataSeeding, DataSeeding>();
             Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            Services.AddScoped<IBasketRepository, BasketRepository>();
+            Services.AddSingleton<IConnectionMultiplexer>( (_) =>
+            {
+
+                return ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnectionString"));
+
+            });
 
             return Services;
         }
