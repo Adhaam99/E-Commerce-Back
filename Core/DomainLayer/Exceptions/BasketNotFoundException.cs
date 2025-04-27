@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Models
+namespace DomainLayer.Exceptions
 {
-    public class ProductType : BaseEntity<int>
+    public class BasketNotFoundException(string id) : Exception($"Basket With Id = {id} Not Found")
     {
-        public string Name { get; set; } = null!;
     }
 }

@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using DomainLayer.Contracts;
-using DomainLayer.Models;
+using DomainLayer.Exceptions;
+using DomainLayer.Models.ProductModule;
 using Service.Specifications;
 using ServiceAbstraction;
 using Shared;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.PrdouctModuleDtos;
 
 namespace Service
 {
@@ -34,7 +35,7 @@ namespace Service
             }
             else
             {
-                throw new Exception($"Product with id {id} not found");
+                throw new ProductNotFoundException(id);
             }
 
         }
