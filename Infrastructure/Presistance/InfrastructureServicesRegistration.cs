@@ -1,6 +1,6 @@
 ﻿
-
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using DomainLayer.Models.IdentityModule;
+using Microsoft.AspNetCore.Identity;
 using Presistence.Identity;
 using StackExchange.Redis;
 
@@ -14,19 +14,26 @@ namespace Presistence
             {
                 Options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
             Services.AddScoped<IDataSeeding, DataSeeding>();
             Services.AddScoped<IUnitOfWork, UnitOfWork>();
             Services.AddScoped<IBasketRepository, BasketRepository>();
+
             Services.AddSingleton<IConnectionMultiplexer>( (_) =>
             {
 
                 return ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnectionString"));
 
             });
+
             Services.AddDbContext<StoreIdentityDbContext>(Options =>
             {
                 Options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
             });
+
+            Services.AddIdentityCore<ApplicationUser>()
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<StoreIdentityDbContext>();
 
             return Services;
         }
