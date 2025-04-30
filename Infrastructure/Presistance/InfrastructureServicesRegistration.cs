@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Presistence.Identity;
 using StackExchange.Redis;
 
 namespace Presistence
@@ -20,6 +22,10 @@ namespace Presistence
 
                 return ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnectionString"));
 
+            });
+            Services.AddDbContext<StoreIdentityDbContext>(Options =>
+            {
+                Options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
             });
 
             return Services;
