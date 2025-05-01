@@ -13,7 +13,7 @@ namespace Service
 {
     public class AutheniticationService(UserManager<ApplicationUser> _userManager) : IAuthenticationService
     {
-        public async Task<UserDto> Login(LoginDto loginDto)
+        public async Task<UserDto> LoginAsync(LoginDto loginDto)
         {
             // Check If Email Is Exsist
             var User = await _userManager.FindByEmailAsync(loginDto.Email) ?? throw new UserNotFoundException(loginDto.Email);
@@ -36,7 +36,7 @@ namespace Service
         }
 
 
-        public async Task<UserDto> Register(RegisterDto registerDto)
+        public async Task<UserDto> RegisterAsync(RegisterDto registerDto)
         {
             // Mapping RegisterDto To ApplicationUser
             var User = new ApplicationUser()
@@ -68,7 +68,7 @@ namespace Service
         }
         private string CreateTokenAsync(ApplicationUser user)
         {
-            throw new NotImplementedException();
+            return "Token To Do";
         }
     }
 }

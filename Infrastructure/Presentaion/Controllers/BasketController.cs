@@ -9,9 +9,8 @@ using Shared.DataTransferObjects.BasketModuleDtos;
 
 namespace Presentation.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class BasketController(IServiceManager _serviceManager) : ControllerBase
+    
+    public class BasketController(IServiceManager _serviceManager) : ApiBaseController
     {
 
         // Create OR Update a new basket

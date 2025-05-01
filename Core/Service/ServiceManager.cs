@@ -21,5 +21,5 @@ namespace Service
 
         private readonly Lazy<IAuthenticationService> _LazyAuthenticationService = new Lazy<IAuthenticationService>(() => new AutheniticationService(_userManager));
         public IAuthenticationService AuthenticationService => _LazyAuthenticationService.Value;
-    }
+    } 
 }

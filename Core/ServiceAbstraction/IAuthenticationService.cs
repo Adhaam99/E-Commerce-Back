@@ -12,11 +12,11 @@ namespace ServiceAbstraction
         // Login
         // Take Email and Password
         // Then Return Token ,  Email and DisplayName 
-        Task<UserDto> Login(LoginDto loginDto);
+        Task<UserDto> LoginAsync(LoginDto loginDto);
 
         // Register
         // Take Email , Password  , UserName , Display Name And Phone Number
         // Then Return Token , Email and Display Name
-        Task<UserDto> Register(RegisterDto registerDto);
+        Task<UserDto> RegisterAsync(RegisterDto registerDto);
     }
 }
