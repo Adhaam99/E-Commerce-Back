@@ -100,7 +100,7 @@ namespace Service
                 issuer: _configuration["JWTOptions:Issuer"],
                 audience: _configuration["JWTOptions:Audience"],
                 claims: Claims,
-                expires: DateTime.Now.AddDays(7),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: Credentials
                 );
 

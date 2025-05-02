@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
 using Shared;
@@ -10,6 +11,7 @@ namespace Presentation.Controllers
     {
         // Get All Products
         // GET: BaseUrl/api/products
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<PaginatedResult<ProductDto>>> GetAllProducts([FromQuery] ProductQueryParams queryParams)
         {
