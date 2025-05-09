@@ -9,6 +9,7 @@ namespace Shared.ErrorModels
     public class ErrorToReturn
     {
         public int StausCode { get; set; }
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } =default!;
+        public List<string> Errors { get; set; } = new List<string>();
     }
 }
