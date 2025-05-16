@@ -1,10 +1,9 @@
 ﻿using DomainLayer.Models.ProductModule;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 
 namespace Presentation.Data.Configurations
 {
-    public class ProductConfigurations : IEntityTypeConfiguration<Product>
+    public class ProductModuleConfigurations : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
