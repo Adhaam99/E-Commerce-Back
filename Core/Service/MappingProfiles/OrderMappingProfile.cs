@@ -16,7 +16,14 @@ namespace Service.MappingProfiles
         public OrderMappingProfile() 
         {
             CreateMap<AddressDto, OrderAddress>().ReverseMap();
-            CreateMap<OrderToReturnDto, Order>().ReverseMap();
+
+            CreateMap<Order, OrderToReturnDto>()
+                .ForMember(dest => dest.DeliveryMethod, options => options.MapFrom(src => src.DeliveryMethod.ShortName));
+
+            CreateMap<OrderItem, OrderItemDto>()
+                .ForMember(dest => dest.ProductName, options => options.MapFrom(src => src.Product.ProductName))
+                .ForMember(dest => dest.PictureUrl, options => options.MapFrom<OrderItemPictureUrlResolver>());
+                
         }
     }
 }
