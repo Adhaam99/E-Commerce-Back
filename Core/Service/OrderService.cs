@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DomainLayer.Contracts;
 using DomainLayer.Exceptions;
+using DomainLayer.Models.BasketModule;
 using DomainLayer.Models.OrderModule;
 using DomainLayer.Models.ProductModule;
 using ServiceAbstraction;
@@ -28,7 +29,7 @@ namespace Service
             List<OrderItem> orderItems = [];
             var ProductRepo = _unitOfWork.GetRepository<Product, int>();
 
-            foreach (var item in orderItems)
+            foreach (var item in basket.Items)
             {
                 var Product = await ProductRepo.GetByIdAsync(item.Id)
                     ?? throw new ProductNotFoundException(item.Id);
@@ -53,11 +54,11 @@ namespace Service
             return _mapper.Map<OrderToReturnDto>(Order);
         }
 
-        private static OrderItem CreateOrderItem(OrderItem item, Product Product)
+        private static OrderItem CreateOrderItem(BasketItem item, Product Product)
         {
             var orderItem = new OrderItem()
             {
-                Product = new ProductItemOrdered() { ProductId = Product.Id, ProductName = Product.Name, PictureUrl = Product.PictureUrl }
+                Product = new ProductItemOrdered() { ProductId = Product.Id, ProductName = Product.Name, PictureUrl = Product.PictureUrl },
                 Price = Product.Price,
                 Quantity = item.Quantity
             };
