@@ -9,6 +9,7 @@ using DomainLayer.Exceptions;
 using DomainLayer.Models.BasketModule;
 using DomainLayer.Models.OrderModule;
 using DomainLayer.Models.ProductModule;
+using Service.Specifications;
 using ServiceAbstraction;
 using Shared.OrderDtos;
 
@@ -64,6 +65,30 @@ namespace Service
             };
 
             return orderItem;
+        }
+
+        public async Task<IEnumerable<DelivreyMethodDto>> GetDeliveryMethodsAsync()
+        {
+            var deliveryMethods = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetAllAsync();
+            var deliveryMethodsDto =  _mapper.Map<IEnumerable<DelivreyMethodDto>>(deliveryMethods);
+            return deliveryMethodsDto;
+        }
+
+        public async Task<IEnumerable<OrderToReturnDto>> GetAllOrdersAsync(string email)
+        {
+            var Spec = new OrderSpecifications(email);
+            var Orders = await _unitOfWork.GetRepository<Order, Guid>().GetAllAsync(Spec);
+            var OrdersDto = _mapper.Map<IEnumerable<OrderToReturnDto>>(Orders);
+            return OrdersDto;
+
+        }
+
+        public async Task<IEnumerable<OrderToReturnDto>> GetOrderByIdAsync(Guid id)
+        {
+            var Spec = new OrderSpecifications(id);
+            var Orders = await _unitOfWork.GetRepository<Order, Guid>().GetAllAsync(Spec);
+            var OrdersDto = _mapper.Map<IEnumerable<OrderToReturnDto>>(Orders);
+            return OrdersDto;
         }
     }
 }
