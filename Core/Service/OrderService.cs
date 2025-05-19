@@ -77,10 +77,9 @@ namespace Service
         public async Task<IEnumerable<OrderToReturnDto>> GetAllOrdersAsync(string email)
         {
             var Spec = new OrderSpecifications(email);
-            var Orders = await _unitOfWork.GetRepository<Order, Guid>().GetAllAsync(Spec);
+            var Orders = await _unitOfWork.GetRepository<Order, Guid>().GetByIdAsync(Spec);
             var OrdersDto = _mapper.Map<IEnumerable<OrderToReturnDto>>(Orders);
             return OrdersDto;
-
         }
 
         public async Task<IEnumerable<OrderToReturnDto>> GetOrderByIdAsync(Guid id)
