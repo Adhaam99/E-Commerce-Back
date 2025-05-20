@@ -11,7 +11,7 @@ using Shared.DataTransferObjects.IdentityDtos;
 
 namespace Presentation.Controllers
 {
-    public class AuthenticarionController(IServiceManager _serviceManager) : ApiBaseController
+    public class AuthenticationController(IServiceManager _serviceManager) : ApiBaseController
     {
         // Login
         [HttpPost("Login")] // Post : BaseUrl/api/Authentication/Login
@@ -42,8 +42,9 @@ namespace Presentation.Controllers
         [HttpGet("CurrentUser")] // Get : BaseUrl/api/Authentication
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
-            var user = await _serviceManager.AuthenticationService.GetCurrentUserAsync(email!);
+            //var email = User.FindFirstValue(ClaimTypes.Email);
+
+            var user = await _serviceManager.AuthenticationService.GetCurrentUserAsync(GetEmailFromToken());
             return Ok(user);
         }
 
@@ -52,8 +53,7 @@ namespace Presentation.Controllers
         [HttpGet("Address")] // Get : BaseUrl/api/Authentication/CurrentUserAddress
         public async Task<ActionResult<AddressDto>> GetCurrentUserAddress()
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
-            var address = await _serviceManager.AuthenticationService.GetCurrentUserAddressAsync(email!);
+            var address = await _serviceManager.AuthenticationService.GetCurrentUserAddressAsync(GetEmailFromToken());
             return Ok(address);
         }
 
@@ -62,8 +62,7 @@ namespace Presentation.Controllers
         [HttpPut("Address")] // Put : BaseUrl/api/Authentication/CurrentUserAddress
         public async Task<ActionResult<AddressDto>> UpdateCurrentUserAddress(AddressDto addressDto)
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
-            var updatedAddress = await _serviceManager.AuthenticationService.UpdateCurrentUserAddressAsync(email!, addressDto);
+            var updatedAddress = await _serviceManager.AuthenticationService.UpdateCurrentUserAddressAsync(GetEmailFromToken(), addressDto);
             return Ok(updatedAddress);
 
         }

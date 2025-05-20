@@ -53,6 +53,14 @@ namespace Presistence
                         await _dbContext.Products.AddRangeAsync(Products);
                 }
 
+                if (!_dbContext.Set<DeliveryMethod>().Any())
+                {
+                    var DeliveryMethodData = File.OpenRead(@"..\Infrastructure\Presistance\Data\DataSeed\delivery.json");
+                    var DeliveryMethods = await JsonSerializer.DeserializeAsync<List<DeliveryMethod>>(DeliveryMethodData);
+                    if (DeliveryMethods is not null && DeliveryMethods.Any())
+                        await _dbContext.Set<DeliveryMethod>().AddRangeAsync(DeliveryMethods);
+                }
+
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception)
@@ -95,12 +103,10 @@ namespace Presistence
                     await _userManager.AddToRoleAsync(User01, "Admin");
                     await _userManager.AddToRoleAsync(User02, "SuperAdmin");
                 }
-
-                await _identityDbContext.SaveChangesAsync();
             }
             catch(Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
         }
     }
