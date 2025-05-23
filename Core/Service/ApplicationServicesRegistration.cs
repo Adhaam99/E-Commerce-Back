@@ -13,8 +13,23 @@ namespace Service
         public static IServiceCollection AddApplicationServices(this IServiceCollection Services)
         {
             Services.AddAutoMapper(typeof(Service.AssemplyReference).Assembly);
-            Services.AddScoped<IServiceManager, ServiceManager>();
+            Services.AddScoped<IServiceManager, ServiceManagerWithFactoryDelegate>();
+            
+            Services.AddScoped<IProductService, ProductService>();
+            Services.AddScoped<Func<IProductService>>(Provider =>
+                () => Provider.GetRequiredService<IProductService>());
 
+            Services.AddScoped<IBasketService, BasketService>();
+            Services.AddScoped<Func<IBasketService>>(Provider =>
+                () => Provider.GetRequiredService<IBasketService>());
+
+            Services.AddScoped<IAuthenticationService, AutheniticationService>();
+            Services.AddScoped<Func<IAuthenticationService>>(Provider =>
+                () => Provider.GetRequiredService<IAuthenticationService>());
+
+            Services.AddScoped<IOrderService, OrderService>();
+            Services.AddScoped<Func<IOrderService>>(Provider =>
+                () => Provider.GetRequiredService<IOrderService>());
             return Services;
         }
     }
