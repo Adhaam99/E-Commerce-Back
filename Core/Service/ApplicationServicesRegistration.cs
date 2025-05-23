@@ -30,6 +30,8 @@ namespace Service
             Services.AddScoped<IOrderService, OrderService>();
             Services.AddScoped<Func<IOrderService>>(Provider =>
                 () => Provider.GetRequiredService<IOrderService>());
+
+            Services.AddScoped<ICacheService, CacheService>();
             return Services;
         }
     }
